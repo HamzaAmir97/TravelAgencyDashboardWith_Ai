@@ -1,9 +1,8 @@
-import { Header } from "components";
+import { Header } from 'components';
+import React from 'react'
+const user= { name :"Hamza"};
 
-const dashboard=()=> {
-
-  const user= { name :"Hamza"};
-
+function AllUsers() {
   return (
     <main className="dashboard wrapper">
     <Header
@@ -14,4 +13,4 @@ const dashboard=()=> {
   )
 }
 
-export default dashboard
+export default AllUsers
