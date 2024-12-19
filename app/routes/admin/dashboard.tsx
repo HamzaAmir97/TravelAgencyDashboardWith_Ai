@@ -1,4 +1,4 @@
-import { Header } from "components";
+import { Header, StatsCard, TripCard } from "components";
 
 const dashboard=()=> {
 
@@ -10,6 +10,9 @@ const dashboard=()=> {
         title={`Welcome ${user?.name ?? 'Guest'} 👋`}
         description="Track activity, trends and popular destinations in real time"
     />
+ <StatsCard/>
+ <TripCard/>
+
   </main>
   )
 }
