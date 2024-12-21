@@ -10,11 +10,11 @@ const dashboard=()=> {
         title={`Welcome ${user?.name ?? 'Guest'} 👋`}
         description="Track activity, trends and popular destinations in real time"
     />
- <StatsCard/>
+ <StatsCard />
  <TripCard/>
 
   </main>
   )
 }
 
-export default dashboard
+export default dashboardPd
