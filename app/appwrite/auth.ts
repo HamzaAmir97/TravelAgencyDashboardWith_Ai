@@ -54,7 +54,10 @@ const getGooglePicture = async (accessToken: string) => {
         if (!response.ok) throw new Error("Failed to fetch Google profile picture");
 
         const { photos } = await response.json();
+        
         return photos?.[0]?.url || null;
+
+
     } catch (error) {
         console.error("Error fetching Google picture:", error);
         return null;

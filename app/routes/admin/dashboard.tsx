@@ -17,4 +17,4 @@ const dashboard=()=> {
   )
 }
 
-export default dashboardPd
+export default dashboard
