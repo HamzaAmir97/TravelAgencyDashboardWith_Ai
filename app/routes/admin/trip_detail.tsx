@@ -178,15 +178,7 @@ const TripDetail = ({ loaderData }: { loaderData: { trip: any; allTrips: any[] }
 
                 <div className="trip-grid">
                     {allTrips.map((trip) => (
-                        <TripCard
-                            key={trip.id}
-                            id={trip.id}
-                            name={trip.name}
-                            imageUrl={trip.imageUrls[0]}
-                            location={trip.itinerary?.[0]?.location ?? ""}
-                            tags={[trip.interests, trip.travelStyle]}
-                            price={trip.estimatedPrice}
-                        />
+                     
                     ))}
                 </div>
             </section>
