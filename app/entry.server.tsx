@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react-router';
 import { PassThrough } from "node:stream";
 
 import type { AppLoadContext, EntryContext } from "react-router";
@@ -9,7 +10,7 @@ import { renderToPipeableStream } from "react-dom/server";
 
 export const streamTimeout = 5_000;
 
-export default function handleRequest(
+ function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -68,3 +69,4 @@ export default function handleRequest(
     setTimeout(abort, streamTimeout + 1000);
   });
 }
+export default Sentry.sentryHandleRequest (handleRequest);
