@@ -1,7 +1,10 @@
 import * as Sentry from '@sentry/react-router';
 import { PassThrough } from "node:stream";
-
-import type { AppLoadContext, EntryContext } from "react-router";
+import {
+  getMetaTagTransformer,
+  wrapSentryHandleRequest,
+} from "@sentry/react-router";
+import type { AppLoadContext, EntryContext, HandleErrorFunction } from "react-router";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { ServerRouter } from "react-router";
 import { isbot } from "isbot";
@@ -69,4 +72,16 @@ export const streamTimeout = 5_000;
     setTimeout(abort, streamTimeout + 1000);
   });
 }
+
+
+export const handleError: HandleErrorFunction = (error, { request }) => {
+  // React Router may abort some interrupted requests, don't log those
+  if (!request.signal.aborted) {
+  Sentry.captureException(error);
+    // optionally log the error so you can see it
+    console.error(error);
+  }
+};
+
+
 export default Sentry.sentryHandleRequest (handleRequest);
