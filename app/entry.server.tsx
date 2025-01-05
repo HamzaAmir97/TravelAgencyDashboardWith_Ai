@@ -50,7 +50,8 @@ export const streamTimeout = 5_000;
             })
           );
 
-          pipe(body);
+          // this enables distributed tracing between client and server
+          pipe(getMetaTagTransformer(body));
         },
         onShellError(error: unknown) {
           reject(error);
@@ -84,4 +85,4 @@ export const handleError: HandleErrorFunction = (error, { request }) => {
 };
 
 
-export default Sentry.sentryHandleRequest (handleRequest);
+export default wrapSentryHandleRequest(handleRequest);
