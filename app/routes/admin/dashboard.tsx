@@ -13,6 +13,7 @@ import {
 } from "@syncfusion/ej2-react-charts";
 import {ColumnDirective, ColumnsDirective, GridComponent, Inject} from "@syncfusion/ej2-react-grids";
 import {tripXAxis, tripyAxis, userXAxis, useryAxis} from "~/constants";
+import type { Route } from "../+types/home";
 
 export const clientLoader = async () => {
     const [
