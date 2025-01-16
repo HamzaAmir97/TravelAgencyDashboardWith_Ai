@@ -2,7 +2,13 @@ import React from 'react'
 
 function trips() {
   return (
-    <div>trips</div>
+      <Header
+                title="Trips"
+                description="View and edit AI-generated travel plans"
+                ctaText="Create a trip"
+                ctaUrl="/trips/create"
+            />
+
   )
 }
 
