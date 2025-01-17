@@ -12,7 +12,7 @@ export const loader = async () => {
 }
 
 const AllUsers = ({ loaderData }: Route.ComponentProps) => {
-     const { users } = loaderData;
+     const { users } = (loaderData as unknown as { users: any[] }) || { users: [] };
 
     return (
         <main className="all-users wrapper">
