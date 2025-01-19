@@ -1,4 +1,17 @@
-import * as Sentry from '@sentry/react-router';
+
+import * as Sentry from "@sentry/react-router";
+import { nodeProfilingIntegration } from '@sentry/profiling-node';
+
+Sentry.init({
+  dsn: "https://5490ef8c6bcb638779d99e990baa9a90@o4509212149612544.ingest.de.sentry.io/4509212154658896",
+  sendDefaultPii: true,
+  integrations: [nodeProfilingIntegration()],
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0,
+});
+
+
+
 import { PassThrough } from "node:stream";
 import {
   getMetaTagTransformer,

@@ -28,7 +28,7 @@ export async function clientLoader() {
   
 
 
-const AdminLayout = () => {
+const admin_layout = () => {
   return (
       <div className="admin-layout">
           <MobileSidebar/> 
@@ -45,4 +45,4 @@ const AdminLayout = () => {
       </div>
   )
 }
-export default AdminLayout
+export default admin_layout
