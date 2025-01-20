@@ -12,7 +12,8 @@ import {
 import * as Sentry from "@sentry/react-router";
 
 import "./app.css";
-import type { Route } from "./routes/+types/home";
+import type { Route } from "./+types/root";
+
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
