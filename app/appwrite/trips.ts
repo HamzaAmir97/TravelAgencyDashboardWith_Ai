@@ -1,6 +1,7 @@
 
 
 
+
 export const getAllTrips = async (limit: number, offset: number) => {
     const allTrips = await Databases.listDocuments(
         appwriteConfig.databaseId,
