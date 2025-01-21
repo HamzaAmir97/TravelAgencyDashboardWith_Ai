@@ -2,7 +2,8 @@ import {Header} from "../../../components";
 import {ColumnsDirective, ColumnDirective, GridComponent} from "@syncfusion/ej2-react-grids";
 import {cn, formatDate} from "~/lib/utils";
 import {getAllUsers} from "~/appwrite/auth";
-import type { Route } from "../+types/home";
+import type { Route } from "./+types/All_Users";
+
 
 
 export const loader = async () => {
@@ -11,7 +12,7 @@ export const loader = async () => {
     return { users, total };
 }
 
-const AllUsers = ({ loaderData }: Route.ComponentProps) => {
+const All_Users = ({ loaderData }: Route.ComponentProps) => {
      const { users } = (loaderData as unknown as { users: any[] }) || { users: [] };
 
     return (
@@ -67,4 +68,4 @@ const AllUsers = ({ loaderData }: Route.ComponentProps) => {
         </main>
     )
 }
-export default AllUsers
+export default All_Users
