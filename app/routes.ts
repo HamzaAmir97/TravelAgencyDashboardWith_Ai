@@ -8,7 +8,9 @@ export default [
         route('dashboard', 'routes/admin/dashboard.tsx'),
         route('All_Users', 'routes/admin/All_Users.tsx'),
         route('trips', 'routes/admin/trips.tsx'),  
-        route('trip/create', 'routes/admin/create_trip.tsx')  
+        route('trip/create', 'routes/admin/create_trip.tsx') , 
+        route('trip/:tripId', 'routes/admin/trip_detail.tsx')  
+
 
     ])
   
