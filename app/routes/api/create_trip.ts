@@ -106,9 +106,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             appwriteConfig.databaseId,
             appwriteConfig.tripCollectionId,
             result.$id,
-            {
-                payment_link: paymentLink.url
-            }
+            // {
+            //     payment_link: paymentLink.url
+            // }
         )
 
         return data({ id: result.$id })
