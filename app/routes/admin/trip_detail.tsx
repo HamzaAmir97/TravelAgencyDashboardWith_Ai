@@ -3,6 +3,7 @@ import {getAllTrips, getTripById} from "~/appwrite/trips";
 import {cn, getFirstWord, parseTripData} from "~/lib/utils";
 import {Header, InfoPill, TripCard} from "../../../components";
 import {ChipDirective, ChipListComponent, ChipsDirective} from "@syncfusion/ej2-react-buttons";
+import type { Route } from "../+types/home";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     const { tripId } = params;
@@ -23,8 +24,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     }
 }
 
-const TripDetail = ({ loaderData }: Route.ComponentProps) => {
-    const imageUrls = loaderData?.trip?.imageUrls || [];
+const TripDetail = ({ loaderData }: { loaderData: { trip: any; allTrips: any[] } }) => {
+    // ...existing code...    const imageUrls = loaderData?.trip?.imageUrls || [];
     const tripData = parseTripData(loaderData?.trip?.tripDetails);
 
     const {
