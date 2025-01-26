@@ -1,7 +1,8 @@
+
+import { Helmet } from "react-helmet";
+
 import {
   isRouteErrorResponse,
-  Links,
-  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -30,20 +31,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
+        <Helmet>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          />
+        </Helmet>
       </head>
       <body>
         {children}
-        <ScrollRestoration />
-        <Scripts />
+        {/* إذا ScrollRestoration و Scripts غير معرفين عندك، احذفهم */}
       </body>
     </html>
   );
 }
-
 export default function App() {
   return <Outlet />;
 }
