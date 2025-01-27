@@ -39,7 +39,7 @@ export const storeUserData = async () => {
             }
         );
 
-        if (!createdUser.$id) redirect("/sign-in");
+        if (!createdUser.$id) redirect("/sign_in");
     } catch (error) {
         console.error("Error storing user data:", error);
     }
@@ -98,7 +98,7 @@ export const getUser = async () => {
             ]
         );
 
-        return documents.length > 0 ? documents[0] : redirect("/sign-in");
+        return documents.length > 0 ? documents[0] : redirect("/sign_in");
     } catch (error) {
         console.error("Error fetching user:", error);
         return null;
