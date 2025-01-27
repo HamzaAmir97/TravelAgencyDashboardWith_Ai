@@ -25,7 +25,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 }
 
 const TripDetail = ({ loaderData }: { loaderData: { trip: any; allTrips: any[] } }) => {
-    // ...existing code...    const imageUrls = loaderData?.trip?.imageUrls || [];
+    const imageUrls = loaderData?.trip?.imageUrls || [];
     const tripData = parseTripData(loaderData?.trip?.tripDetails);
 
     const {
