@@ -117,6 +117,11 @@ const TripDetail = ({ loaderData }: { loaderData: { trip: any; allTrips: any[] }
                     </ul>
                 </section>
 
+
+
+
+
+
                 <section className="title">
                     <article>
                         <h3>
