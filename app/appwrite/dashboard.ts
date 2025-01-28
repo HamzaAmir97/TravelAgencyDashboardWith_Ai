@@ -9,8 +9,7 @@ type FilterByDate = (
     items: Document[],
     key: string,
     start: string,
-    end?
-    : string
+    end?: string
 ) => number;
 
 export const getUsersAndTripsStats = async (): Promise<DashboardStats> => {
@@ -87,10 +86,6 @@ export const getUsersAndTripsStats = async (): Promise<DashboardStats> => {
     }
 }
 
-
-
-
-
 export const getUserGrowthPerDay = async () => {
     const users = await database.listDocuments(
         appwriteConfig.databaseId,
@@ -140,7 +135,6 @@ export const getTripsCreatedPerDay = async () => {
         day,
     }));
 };
-
 
 export const getTripsByTravelStyle = async () => {
     const trips = await database.listDocuments(

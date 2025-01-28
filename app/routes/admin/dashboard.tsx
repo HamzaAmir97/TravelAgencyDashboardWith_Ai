@@ -1,5 +1,8 @@
 import {Header, StatsCard, TripCard} from "../../../components";
 import {getAllUsers, getUser} from "~/appwrite/auth";
+import type { Route } from './+types/dashboard';
+import {getTripsByTravelStyle, getUserGrowthPerDay, getUsersAndTripsStats} from "~/appwrite/dashboard";
+import {getAllTrips} from "~/appwrite/trips";
 import {parseTripData} from "~/lib/utils";
 import {
     Category,
@@ -11,9 +14,7 @@ import {
 } from "@syncfusion/ej2-react-charts";
 import {ColumnDirective, ColumnsDirective, GridComponent, Inject} from "@syncfusion/ej2-react-grids";
 import {tripXAxis, tripyAxis, userXAxis, useryAxis} from "~/constants";
-import type { Route } from "../+types/home";
-import { getAllTrips } from "~/appwrite/trips";
-import { getTripsByTravelStyle, getUserGrowthPerDay, getUsersAndTripsStats } from "~/appwrite/dashboard";
+import {redirect} from "react-router";
 
 export const clientLoader = async () => {
     const [
@@ -38,7 +39,7 @@ export const clientLoader = async () => {
         imageUrls: imageUrls ?? []
     }))
 
-    const mappedUsers: UsersItineraryCount[] = allUsers.users.map((user: any) => ({
+    const mappedUsers: UsersItineraryCount[] = allUsers.users.map((user) => ({
         imageUrl: user.imageUrl,
         name: user.name,
         count: user.itineraryCount ?? Math.floor(Math.random() * 10),
@@ -56,10 +57,10 @@ export const clientLoader = async () => {
 
 
 const Dashboard = ({ loaderData }: Route.ComponentProps) => {
-    const user = (loaderData as any)?.user as User | null;
-    const { dashboardStats, allTrips, userGrowth, tripsByTravelStyle, allUsers } = loaderData as any;
+    const user = loaderData.user as User | null;
+    const { dashboardStats, allTrips, userGrowth, tripsByTravelStyle, allUsers } = loaderData;
 
-    const trips = allTrips.map((trip: any) => ({
+    const trips = allTrips.map((trip) => ({
         imageUrl: trip.imageUrls[0],
         name: trip.name,
         interest: trip.interests,
@@ -113,7 +114,7 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
                 <h1 className="text-xl font-semibold text-dark-100">Created Trips</h1>
 
                 <div className='trip-grid'>
-                    {allTrips.map((trip: any) => (
+                    {allTrips.map((trip) => (
                         <TripCard
                             key={trip.id}
                             id={trip.id.toString()}

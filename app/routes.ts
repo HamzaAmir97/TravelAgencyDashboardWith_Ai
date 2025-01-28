@@ -1,22 +1,18 @@
-import { type RouteConfig, index, layout, route } from "@react-router/dev/routes";
+import {type RouteConfig, route, layout, index} from "@react-router/dev/routes";
 
 export default [
-    route('sign_in', 'routes/root/sign_in.tsx'),
-    route('api/create_trip', 'routes/api/create_trip.ts'),
-    layout('routes/admin/admin_layout.tsx',[
-
+    route('sign-in', 'routes/root/sign-in.tsx'),
+    route('api/create-trip', 'routes/api/create-trip.ts'),
+    layout("routes/admin/admin-layout.tsx", [
         route('dashboard', 'routes/admin/dashboard.tsx'),
-        route('All_Users', 'routes/admin/All_Users.tsx'),
-        route('trips', 'routes/admin/trips.tsx'),  
-        route('trip/create', 'routes/admin/create_trip.tsx') , 
-        route('trip/:tripId', 'routes/admin/trip_detail.tsx')  
-
-
+        route('all-users', 'routes/admin/all-users.tsx'),
+        route('trips', 'routes/admin/trips.tsx'),
+        route('trips/create', 'routes/admin/create-trip.tsx'),
+        route('trips/:tripId', 'routes/admin/trip-detail.tsx'),
     ]),
-  layout('routes/root/page_layout.tsx', [
-    index('routes/root/travel_page.tsx'),
-    route('/travel/:tripId', 'routes/root/travel_detail.tsx'),
-    // route('/travel/:tripId/success', 'routes/root/payment_success.tsx'),
-])
-
+    layout('routes/root/page-layout.tsx', [
+        index('routes/root/travel-page.tsx'),
+        route('/travel/:tripId', 'routes/root/travel-detail.tsx'),
+        route('/travel/:tripId/success', 'routes/root/payment-success.tsx'),
+    ])
 ] satisfies RouteConfig;

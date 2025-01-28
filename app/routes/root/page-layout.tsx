@@ -1,8 +1,7 @@
-import RootNavbar from "components/RootNavbar";
 import {Outlet, redirect, useNavigate} from "react-router";
 import {getExistingUser, logoutUser, storeUserData} from "~/appwrite/auth";
 import {account} from "~/appwrite/client";
-
+import RootNavbar from "../../../components/RootNavbar";
 
 export async function clientLoader() {
     try {
@@ -14,7 +13,7 @@ export async function clientLoader() {
         return existingUser?.$id ? existingUser : await storeUserData();
     } catch (e) {
         console.log('Error fetching user', e)
-        return redirect('/sign_in')
+        return redirect('/sign-in')
     }
 }
 

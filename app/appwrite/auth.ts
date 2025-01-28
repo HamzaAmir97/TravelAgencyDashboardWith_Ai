@@ -39,7 +39,7 @@ export const storeUserData = async () => {
             }
         );
 
-        if (!createdUser.$id) redirect("/sign_in");
+        if (!createdUser.$id) redirect("/sign-in");
     } catch (error) {
         console.error("Error storing user data:", error);
     }
@@ -54,10 +54,7 @@ const getGooglePicture = async (accessToken: string) => {
         if (!response.ok) throw new Error("Failed to fetch Google profile picture");
 
         const { photos } = await response.json();
-        
         return photos?.[0]?.url || null;
-
-
     } catch (error) {
         console.error("Error fetching Google picture:", error);
         return null;
@@ -98,7 +95,7 @@ export const getUser = async () => {
             ]
         );
 
-        return documents.length > 0 ? documents[0] : redirect("/sign_in");
+        return documents.length > 0 ? documents[0] : redirect("/sign-in");
     } catch (error) {
         console.error("Error fetching user:", error);
         return null;

@@ -1,32 +1,17 @@
-
-import * as Sentry from "@sentry/react-router";
-import { nodeProfilingIntegration } from '@sentry/profiling-node';
-
-Sentry.init({
-  dsn: "https://5490ef8c6bcb638779d99e990baa9a90@o4509212149612544.ingest.de.sentry.io/4509212154658896",
-  sendDefaultPii: true,
-  integrations: [nodeProfilingIntegration()],
-  tracesSampleRate: 1.0,
-  profilesSampleRate: 1.0,
-});
-
-
-
 import { PassThrough } from "node:stream";
-import {
-  getMetaTagTransformer,
-  wrapSentryHandleRequest,
-} from "@sentry/react-router";
-import type { AppLoadContext, EntryContext, HandleErrorFunction } from "react-router";
+import * as Sentry from '@sentry/react-router';
+
+import type {AppLoadContext, EntryContext, HandleErrorFunction} from "react-router";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { ServerRouter } from "react-router";
 import { isbot } from "isbot";
 import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
+import {getMetaTagTransformer} from "@sentry/react-router";
 
 export const streamTimeout = 5_000;
 
- function handleRequest(
+function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -63,8 +48,8 @@ export const streamTimeout = 5_000;
             })
           );
 
-          // this enables distributed tracing between client and server
-          pipe(getMetaTagTransformer(body));
+            // this enables distributed tracing between client and server
+            pipe(getMetaTagTransformer(body));
         },
         onShellError(error: unknown) {
           reject(error);
@@ -87,15 +72,13 @@ export const streamTimeout = 5_000;
   });
 }
 
-
 export const handleError: HandleErrorFunction = (error, { request }) => {
-  // React Router may abort some interrupted requests, don't log those
-  if (!request.signal.aborted) {
-  Sentry.captureException(error);
-    // optionally log the error so you can see it
-    console.error(error);
-  }
+    // React Router may abort some interrupted requests, don't log those
+    if (!request.signal.aborted) {
+        Sentry.captureException(error);
+        // optionally log the error so you can see it
+        console.error(error);
+    }
 };
 
-
-export default wrapSentryHandleRequest(handleRequest);
+export default Sentry.wrapSentryHandleRequest(handleRequest);

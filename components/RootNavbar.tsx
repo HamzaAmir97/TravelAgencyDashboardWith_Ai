@@ -11,7 +11,7 @@ const RootNavbar = () => {
 
     const handleLogout = async () => {
         await logoutUser();
-        navigate('/sign_in')
+        navigate('/sign-in')
     }
 
     return (

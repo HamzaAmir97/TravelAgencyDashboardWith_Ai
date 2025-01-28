@@ -1,10 +1,9 @@
-import {Link, type LoaderFunctionArgs} from "react-router";
+import type {LoaderFunctionArgs} from "react-router";
 import {getAllTrips, getTripById} from "~/appwrite/trips";
-
+import type { Route } from './+types/trip-detail';
 import {cn, getFirstWord, parseTripData} from "~/lib/utils";
 import {Header, InfoPill, TripCard} from "../../../components";
-import {ButtonComponent, ChipDirective, ChipListComponent, ChipsDirective} from "@syncfusion/ej2-react-buttons";
-import type { Route } from "./+types/travel_detail";
+import {ChipDirective, ChipListComponent, ChipsDirective} from "@syncfusion/ej2-react-buttons";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     const { tripId } = params;
@@ -25,10 +24,9 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     }
 }
 
-const travel_detail = ({ loaderData }: { loaderData: Awaited<ReturnType<typeof loader>> }) => {
+const TripDetail = ({ loaderData }: Route.ComponentProps) => {
     const imageUrls = loaderData?.trip?.imageUrls || [];
     const tripData = parseTripData(loaderData?.trip?.tripDetails);
-    const paymentLink = loaderData?.trip?.payment_link;
 
     const {
         name, duration, itinerary, travelStyle,
@@ -50,28 +48,23 @@ const travel_detail = ({ loaderData }: { loaderData: Awaited<ReturnType<typeof l
     ]
 
     return (
-        <main className="travel-detail pt-40 wrapper">
-            <div className="travel-div">
-                <Link to="/" className="back-link">
-                    <img src="/assets/icons/arrow-left.svg" alt="back icon" />
-                    <span>Go back</span>
-                </Link>
-
+        <main className="travel-detail wrapper">
+            <Header title="Trip Details" description="View and edit AI-generated travel plans" />
 
             <section className="container wrapper-md">
                 <header>
                     <h1 className="p-40-semibold text-dark-100">{name}</h1>
                     <div className="flex items-center gap-5">
-                        <InfoPill
-                            text={`${duration} day plan`}
-                            image="/assets/icons/calendar.svg"
-                        />
+                <InfoPill
+                    text={`${duration} day plan`}
+                    image="/assets/icons/calendar.svg"
+                />
 
-                        <InfoPill
-                            text={itinerary?.slice(0,4)
-                                .map((item) => item.location).join(', ') || ''}
-                            image="/assets/icons/location-mark.svg"
-                        />
+                <InfoPill
+                    text={itinerary?.slice(0,4)
+                        .map((item) => item.location).join(', ') || ''}
+                    image="/assets/icons/location-mark.svg"
+                />
                     </div>
                 </header>
 
@@ -81,8 +74,8 @@ const travel_detail = ({ loaderData }: { loaderData: Awaited<ReturnType<typeof l
                             src={url}
                             key={i}
                             className={cn('w-full rounded-xl object-cover', i === 0
-                                ? 'md:col-span-2 md:row-span-2 h-[330px]'
-                                : 'md:row-span-1 h-[150px]')}
+                            ? 'md:col-span-2 md:row-span-2 h-[330px]'
+                            : 'md:row-span-1 h-[150px]')}
                         />
                     ))}
                 </section>
@@ -172,17 +165,7 @@ const travel_detail = ({ loaderData }: { loaderData: Awaited<ReturnType<typeof l
                     </section>
                 ))}
 
-                <a href={paymentLink} className="flex">
-                    <ButtonComponent className="button-class" type="submit">
-                        <span className="p-16-semibold text-white">
-                            Pay to join the trip
-                        </span>
-                        <span className="price-pill">{estimatedPrice}</span>
-                    </ButtonComponent>
-                </a>
-
             </section>
-            </div>
 
             <section className="flex flex-col gap-6">
                 <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>
@@ -204,4 +187,4 @@ const travel_detail = ({ loaderData }: { loaderData: Awaited<ReturnType<typeof l
         </main>
     )
 }
-export default travel_detail
+export default TripDetail

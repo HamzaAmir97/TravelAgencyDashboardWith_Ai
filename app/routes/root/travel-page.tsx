@@ -3,16 +3,10 @@ import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
 import {cn, parseTripData} from "~/lib/utils";
 import {Header, TripCard} from "../../../components";
 import {getAllTrips} from "~/appwrite/trips";
-
+import type {Route} from "../../../.react-router/types/app/routes/admin/+types/trips";
 import {useState} from "react";
 import {getUser} from "~/appwrite/auth";
 import {PagerComponent} from "@syncfusion/ej2-react-grids";
-import type { Route } from "../+types/home";
-
-type LoaderData = {
-    trips: any[];
-    total: number;
-};
 
 const FeaturedDestination = ({ containerClass = '', bigCard = false, rating, title, activityCount, bgImage }: DestinationProps) => (
     <section className={cn('rounded-[14px] overflow-hidden bg-cover bg-center size-full min-w-[280px]', containerClass, bgImage)}>
@@ -60,8 +54,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     }
 }
 
-const TravelPage = ({ loaderData }: { loaderData: LoaderData }) => {
-    const trips = loaderData?.trips || [];
+const TravelPage = ({ loaderData }: Route.ComponentProps) => {
+    const trips = loaderData.trips as Trip[] | [];
 
     const [searchParams] = useSearchParams();
     const initialPage = Number(searchParams.get('page') || '1')
@@ -174,7 +168,7 @@ const TravelPage = ({ loaderData }: { loaderData: LoaderData }) => {
                 </div>
 
                 <PagerComponent
-                    totalRecordsCount={loaderData?.total || 0}
+                    totalRecordsCount={loaderData.total}
                     pageSize={8}
                     currentPage={currentPage}
                     click={(args) => handlePageChange(args.currentPage)}
