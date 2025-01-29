@@ -154,21 +154,6 @@ const TripDetail = ({ loaderData }: { loaderData: { trip: any; allTrips: any[] }
                     ))}
                 </ul>
 
-                {visitTimeAndWeatherInfo.map((section) => (
-                    <section key={section.title} className="visit">
-                        <div>
-                            <h3>{section.title}</h3>
-
-                            <ul>
-                                {section.items?.map((item) => (
-                                    <li key={item}>
-                                        <p className="flex-grow">{item}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </section>
-                ))}
 
             </section>
 
