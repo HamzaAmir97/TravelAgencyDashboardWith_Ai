@@ -7,7 +7,7 @@ import {PagerComponent} from "@syncfusion/ej2-react-grids";
 import type { Route } from "../+types/home";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    const limit = 8;
+    const limit = 6;
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get('page') || "1", 10);
     const offset = (page - 1) * limit;
