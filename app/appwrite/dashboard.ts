@@ -9,7 +9,8 @@ type FilterByDate = (
     items: Document[],
     key: string,
     start: string,
-    end?: string
+    end?
+    : string
 ) => number;
 
 export const getUsersAndTripsStats = async (): Promise<DashboardStats> => {
