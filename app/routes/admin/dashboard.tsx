@@ -1,7 +1,6 @@
 import {Header, StatsCard, TripCard} from "../../../components";
 import {getAllUsers, getUser} from "~/appwrite/auth";
 import {getTripsByTravelStyle, getUserGrowthPerDay, getUsersAndTripsStats} from "~/appwrite/dashboard";
-import {getAllTrips} from "~/appwrite/trips";
 import {parseTripData} from "~/lib/utils";
 import {
     Category,
@@ -14,6 +13,7 @@ import {
 import {ColumnDirective, ColumnsDirective, GridComponent, Inject} from "@syncfusion/ej2-react-grids";
 import {tripXAxis, tripyAxis, userXAxis, useryAxis} from "~/constants";
 import type { Route } from "../+types/home";
+import { getAllTrips } from "~/appwrite/trips";
 
 export const clientLoader = async () => {
     const [
@@ -32,13 +32,13 @@ export const clientLoader = async () => {
         await getAllUsers(4, 0),
     ])
 
-    const allTrips = trips.allTrips.map(({ $id, tripDetails, imageUrls }) => ({
+    const allTrips = trips.allTrips.map(({ $id, tripDetails, imageUrls }: { $id: string; tripDetails: string; imageUrls?: string[] }) => ({
         id: $id,
         ...parseTripData(tripDetails),
         imageUrls: imageUrls ?? []
     }))
 
-    const mappedUsers: UsersItineraryCount[] = allUsers.users.map((user) => ({
+    const mappedUsers: UsersItineraryCount[] = allUsers.users.map((user: any) => ({
         imageUrl: user.imageUrl,
         name: user.name,
         count: user.itineraryCount ?? Math.floor(Math.random() * 10),
@@ -56,10 +56,10 @@ export const clientLoader = async () => {
 
 
 const Dashboard = ({ loaderData }: Route.ComponentProps) => {
-    const user = loaderData.user as User | null;
-    const { dashboardStats, allTrips, userGrowth, tripsByTravelStyle, allUsers } = loaderData;
+    const user = (loaderData as any)?.user as User | null;
+    const { dashboardStats, allTrips, userGrowth, tripsByTravelStyle, allUsers } = loaderData as any;
 
-    const trips = allTrips.map((trip) => ({
+    const trips = allTrips.map((trip: any) => ({
         imageUrl: trip.imageUrls[0],
         name: trip.name,
         interest: trip.interests,
@@ -113,7 +113,7 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
                 <h1 className="text-xl font-semibold text-dark-100">Created Trips</h1>
 
                 <div className='trip-grid'>
-                    {allTrips.map((trip) => (
+                    {allTrips.map((trip: any) => (
                         <TripCard
                             key={trip.id}
                             id={trip.id.toString()}
