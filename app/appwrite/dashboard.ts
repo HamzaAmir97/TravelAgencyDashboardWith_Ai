@@ -87,6 +87,10 @@ export const getUsersAndTripsStats = async (): Promise<DashboardStats> => {
     }
 }
 
+
+
+
+
 export const getUserGrowthPerDay = async () => {
     const users = await database.listDocuments(
         appwriteConfig.databaseId,
@@ -134,30 +138,5 @@ export const getTripsCreatedPerDay = async () => {
     return Object.entries(tripsGrowth).map(([day, count]) => ({
         count: Number(count),
         day,
-    }));
-};
-
-export const getTripsByTravelStyle = async () => {
-    const trips = await database.listDocuments(
-        appwriteConfig.databaseId,
-        appwriteConfig.tripCollectionId
-    );
-
-    const travelStyleCounts = trips.documents.reduce(
-        (acc: { [key: string]: number }, trip: Document) => {
-            const tripDetail = parseTripData(trip.tripDetails);
-
-            if (tripDetail && tripDetail.travelStyle) {
-                const travelStyle = tripDetail.travelStyle;
-                acc[travelStyle] = (acc[travelStyle] || 0) + 1;
-            }
-            return acc;
-        },
-        {}
-    );
-
-    return Object.entries(travelStyleCounts).map(([travelStyle, count]) => ({
-        count: Number(count),
-        travelStyle,
     }));
 };
