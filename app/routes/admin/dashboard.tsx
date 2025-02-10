@@ -1,6 +1,5 @@
 import {Header, StatsCard, TripCard} from "../../../components";
 import {getAllUsers, getUser} from "~/appwrite/auth";
-import {getTripsByTravelStyle, getUserGrowthPerDay, getUsersAndTripsStats} from "~/appwrite/dashboard";
 import {parseTripData} from "~/lib/utils";
 import {
     Category,
@@ -14,6 +13,7 @@ import {ColumnDirective, ColumnsDirective, GridComponent, Inject} from "@syncfus
 import {tripXAxis, tripyAxis, userXAxis, useryAxis} from "~/constants";
 import type { Route } from "../+types/home";
 import { getAllTrips } from "~/appwrite/trips";
+import { getTripsByTravelStyle, getUserGrowthPerDay, getUsersAndTripsStats } from "~/appwrite/dashboard";
 
 export const clientLoader = async () => {
     const [
@@ -32,7 +32,7 @@ export const clientLoader = async () => {
         await getAllUsers(4, 0),
     ])
 
-    const allTrips = trips.allTrips.map(({ $id, tripDetails, imageUrls }: { $id: string; tripDetails: string; imageUrls?: string[] }) => ({
+    const allTrips = trips.allTrips.map(({ $id, tripDetails, imageUrls }) => ({
         id: $id,
         ...parseTripData(tripDetails),
         imageUrls: imageUrls ?? []
