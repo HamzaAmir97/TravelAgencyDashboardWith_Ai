@@ -1,7 +1,8 @@
+import RootNavbar from "components/RootNavbar";
 import {Outlet, redirect, useNavigate} from "react-router";
 import {getExistingUser, logoutUser, storeUserData} from "~/appwrite/auth";
 import {account} from "~/appwrite/client";
-import RootNavbar from "../../../components/RootNavbar";
+
 
 export async function clientLoader() {
     try {

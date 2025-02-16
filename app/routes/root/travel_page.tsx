@@ -3,7 +3,7 @@ import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
 import {cn, parseTripData} from "~/lib/utils";
 import {Header, TripCard} from "../../../components";
 import {getAllTrips} from "~/appwrite/trips";
-import type {Route} from "../../../.react-router/types/app/routes/admin/+types/trips";
+
 import {useState} from "react";
 import {getUser} from "~/appwrite/auth";
 import {PagerComponent} from "@syncfusion/ej2-react-grids";
