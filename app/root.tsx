@@ -1,5 +1,3 @@
-
-
 import {
   isRouteErrorResponse,
   Links,
@@ -7,15 +5,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  type LinksFunction,
 } from "react-router";
 
 import * as Sentry from "@sentry/react-router";
 
 import "./app.css";
-import type { Route } from "./+types/root";
 
 
-export const links: Route.LinksFunction = () => [
+export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
@@ -50,7 +48,7 @@ export default function App() {
   return <Outlet />;
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+export function ErrorBoundary({ error }: { error: unknown }) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
